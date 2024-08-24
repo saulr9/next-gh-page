@@ -60,7 +60,6 @@ jobs:
           path: out
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: ./.github/workflows/deploy.yml
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out

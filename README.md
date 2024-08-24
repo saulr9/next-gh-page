@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Activities
 
-## Getting Started
+- GitHub Actions are Easy with GitHub Copilot!
+- Deploy to GitHub Pages with GitHub Actions and Copilot
 
-First, run the development server:
+### General Objectives:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Become familiar with using GitHub Copilot to create automated workflows in GitHub Actions:
+- Automate the development and deployment lifecycle of a Next.js application using GitHub Actions
+
+### Specific Objectives:
+
+- Set up the Node.js environment using GitHub Actions
+- Run automated tests and build the application
+- Integrate security actions into the workflow
+- Deploy the Next.js application to GitHub Pages
+- Optimize and refine the workflow with GitHub Copilot's assistance
+
+### Expected Outcomes:
+
+By the end of the hands-on session, you should have a fully functional CI/CD pipeline that handles everything from dependency installation to deploying the application on GitHub Pages.
+Additionally, you will have learned how to leverage GitHub Copilot to accelerate the setup of workflows in GitHub Actions and how to integrate security tools into the process.
+
+### Step 1: Clone the Repository
+
+### Step 2: Create a New Repository
+
+Settings -> Actions -> General -> Workflow Permissions -> Read and Write
+
+### Step 3: Add New Remote to Cloned Repository
+
+### Step 4: Create a basic workflow template using GitHub Copilot
+
+```
+@workspace I want to create a basic github workflow called handson that trigger on every push to main branch. I just want the trigger step
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 5: Define job in the workflow
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+#file:handson.yml define a job ci without steps, use ubuntu-latest as runner
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Step 6: Checkout Code andSetup Node
 
-## Learn More
+```
+Add steps to checkout code and setup node, use node version 20
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Step 7: Implement CodeQl to code analisis and find vulnerabilities
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+I want to implement a step to code analisis and find vulnerabilities, use codeQl and Javascript/TypeScript as target languages and explain me the new steps
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Reference:
 
-## Deploy on Vercel
+- https://codeql.github.com/
+- https://github.com/github/codeql-action/blob/v2/analyze/action.yml
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Step 8: Implement TruffleHog to Find Leaked Credentials
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Now, I want to implement a step to find possible leaked credentials, use trufflesecurity/trufflehog with the main version, only-verified as extra_args, head with the current ref name
+
+In case that you have some errors with the version use:
+
+```
+name: Scan for leaked credentials
+uses: trufflesecurity/trufflehog@main
+with:
+base: ""
+head: ${{ github.ref_name }}
+extra_args: --only-verified
+```
+
+Reference:
+
+- https://github.com/trufflesecurity/trufflehog
+
+### Step 9: Add step to run test
+
+Ask to copilot chat or use comment driven development to add another step to run tests
+
+Copilot chat: Add another step to run tests with npm run
+
+Comment driven development: Add another step to run tests with npm run
+
+### Step 10: Add step to build
+
+Copilot chat: Add another step to run the build with npm run
+Comment driven development:Add another step to run the build with npm run
+
+### Step 11: Test workflow
+
+We are going to test our workflow, pleas commit and push to main branch. Then:
+
+- Go to your repository
+- Navigate to "Actions tab"
+  You will see your workflow running
+
+## Deploy to GitHub Pages with GitHub Actions and Copilot
+
+### Step 1: Add Step to upload out directory with upload artifact action
+
+Ask to copilot chat to add a new step in the current job to upload the out directory using upload artifact action
+
+```
+Now, I want to use the upload artifact action to upload the out directory
+```
+
+### Step 2: Create a new job to deploy our app
+
+Ask to copilot chat to create another job called deploy and to add a step to dwonload the previous uploaded artifact
+
+```
+How to create another job called deploy with only a step to download an artifact and the output should be 'out'
+```
+
+### Step 3: Add step to deploy to GitHub Pages
+
+Ask to copilot how to deploy to github page
+
+```
+How to deploy the out directory to github page?
+```
