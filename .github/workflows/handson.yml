@@ -49,7 +49,7 @@ jobs:
         with:
           name: out-directory
           path: out
-  deploy:
+  download-artifact:
     needs: ci
     runs-on: ubuntu-latest
     steps:
@@ -58,8 +58,8 @@ jobs:
         with:
           name: out-directory
           path: out
-
-      - name: Deploy to GitHub Pages
-        uses: ./.github/workflows/deploy.yml@main
-        with:
-          publish_dir: ./out
+  deploy:
+    needs: download-artifact
+    uses: ./.github/workflows/deploy.yml
+    with:
+      publish_dir: out
