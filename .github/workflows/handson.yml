@@ -60,6 +60,6 @@ jobs:
           path: out
 
       - name: Deploy to GitHub Pages
-        uses: ./.github/workflows/deploy.yml
+        uses: ./.github/workflows/deploy.yml@main
         with:
           publish_dir: ./out
