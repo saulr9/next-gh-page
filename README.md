@@ -2,7 +2,7 @@
 
 - GitHub Actions are Easy with GitHub Copilot!
 - Deploy to GitHub Pages with GitHub Actions and Copilot
-- Create Reusable Workflows
+- Create Reusable Workflows.
 
 ### General Objectives:
 
